@@ -44,4 +44,101 @@ git commit -m "Check pre-commit file"
 ![image](https://github.com/user-attachments/assets/0b50dc58-a4a7-4f53-8db0-77043182e8dd)
 
 
-### Задание 2
+### Задание 2 - Использование Git Flow в проекте
+
+
+1. Установим Git Flow на локальную машину:
+
+```
+sudo apt-get install git-flow
+```
+
+2. В корне репозитория выполним инициализацию Git Flow.
+
+```
+git flow init
+```
+
+3. Создадим ветку для новой функциональности, допустим она называется "task-management":
+
+```
+git flow feature start task-management
+```
+
+4. Внесем изменения в код для добавления функционала управления задачами (например, в файл task_manager.py):
+
+```
+def create_task(title, description):
+    # Логика создания задачи
+    if description == "":
+        print("Описание не задано")
+    print(f"Создана новая задача: {title}")
+```
+
+Выполним коммит:
+
+```
+git add task_manager.py
+git commit -m "Добавлен функционал управления задачами"
+```
+
+5. Завершим фичу и объединим ее с основной веткой:
+
+```
+git flow feature finish task-management
+
+```
+
+Git Flow автоматически переключится на ветку develop и выполнит слияние. 
+
+6. Переключимся на ветку "develop" и начнем создание релиза:
+
+```
+git checkout develop
+git flow release start v1.0.0
+```
+
+7. Внесем изменения, связанные с релизом (например, добавим версию в файле version.txt):
+
+```
+echo "v1.0.0" > version.txt
+git add version.txt
+git commit -m "Обновлена версия для релиза v1.0.0"
+
+```
+
+
+8. Завершим релиз и объединим его с ветками "develop" и "main":
+
+```
+git flow release finish v1.0.0
+```
+
+9. Создаем hotfix (у нас конечно же ошибки никакой не возникнет, но hotfix все равно создаем):
+
+```
+git flow hotfix start hotfix-1.0.1
+```
+
+10. Внесем изменения для исправления ошибки и коммитите:
+
+```
+# Исправление ошибки
+git add file_with_error.py
+git commit -m "Исправлена критическая ошибка"
+```
+
+11. Завершим hotfix и объединим его с ветками "develop" и "main":
+
+```
+git flow hotfix finish hotfix-1.0.1
+```
+
+12. Запушим изменения на удаленный репозиторий:
+
+```
+git push origin develop
+git push origin master
+```
+![image](https://github.com/user-attachments/assets/c5f66628-7bdf-401c-bf7b-81f7f45df396)
+
