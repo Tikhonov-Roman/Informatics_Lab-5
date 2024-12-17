@@ -18,7 +18,7 @@ gedit pre-commit
 for file in $(git diff --cached --name-only); do
     if [[ $file == *.txt ]]; then
         if grep -q "Автор:" "$file"; then
-            echo "Файл $file соответствует формату и имеет подпись автора."
+            echo "Успех: Файл $file соответствует формату и имеет подпись автора."
         else
             echo "Ошибка: Файл $file соответствует формату, но не имеет подписи"
             exit 1
